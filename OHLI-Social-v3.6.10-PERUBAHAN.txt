@@ -1,0 +1,23 @@
+OHLI SOCIAL v3.6.10 — PERBAIKAN BUILD APK
+
+Penyebab build v3.6.9 gagal:
+- MainActivity.java memiliki string setText yang terputus oleh baris baru mentah pada kalimat nomor 5 dan 6.
+- Javac melaporkan `unclosed string literal` pada baris 199–200, lalu menghasilkan error turunan seperti `; expected`.
+
+Perbaikan:
+- Teks instruksi server kini dirangkai menjadi beberapa string Java dengan newline `\n` eksplisit.
+- Android versionName: 3.6.10
+- Android versionCode: 39
+- Endpoint /health, asset cache-busting, README, dan workflow GitHub Actions diperbarui agar memilih arsip v3.6.10 terlebih dahulu.
+
+Ruang lingkup:
+- Perbaikan ini menargetkan error kompilasi yang terlihat pada log Gradle yang dikirim pengguna.
+- Tidak ada perubahan pada database atau data pengguna.
+- Tidak ada perubahan pada aturan OTP selain membawa fitur yang sudah ada dari v3.6.9.
+
+Status verifikasi:
+- Pemeriksaan blok Java: lulus.
+- Pemeriksaan konsistensi versi dan workflow: lulus.
+- Source verifier: 147 pemeriksaan statis lulus.
+- JavaScript aplikasi dan skrip smoke-test lulus `node --check`; smoke test dua akun belum dijalankan karena memerlukan server aktif dan dua akun uji yang sudah diverifikasi OTP.
+- Pemindaian sintaks Java tidak menemukan error parser/string yang dilaporkan pada build sebelumnya; kompilasi penuh tetap harus dikonfirmasi lewat GitHub Actions karena classpath Android SDK tidak tersedia di lingkungan penyusunan ini.

@@ -1,0 +1,10 @@
+OHLI SOCIAL v3.6.11 — PERUBAHAN
+
+Fokus perubahan hanya pada tampilan mobile Shorts dan navigasi bawah, serta perilaku audio yang mengikuti kebijakan browser.
+
+1. Mobile bottom navigation: pintasan Story terpisah disembunyikan; Chat dikembalikan sebagai item keenam. Story tetap dapat dibuka dari halaman/profil/fitur Story yang sudah ada.
+2. Shorts mobile: video vertikal full-bleed, snap scroll per video, kontrol aksi vertikal di sisi kanan, info kreator dan caption di kiri bawah, serta progress tipis. Perubahan dibatasi pada halaman Video pendek di layar <=850px.
+3. Audio: video boleh autoplay dalam keadaan mute sebelum ada interaksi pengguna. Setelah interaksi tepercaya pertama, suara dapat dibuka jika browser mengizinkan dan video memang memiliki track audio.
+4. Versi Android: versionName 3.6.11, versionCode 40.
+
+Tidak ada fitur server, database, chat, Story viewer, LIVE, profil, atau feed desktop yang sengaja diubah.

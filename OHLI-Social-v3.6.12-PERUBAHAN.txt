@@ -1,0 +1,13 @@
+OHLI SOCIAL v3.6.12 — PERUBAHAN
+
+1. Sorotan sekarang berupa koleksi: satu Sorotan dapat berisi banyak Story.
+2. Saat memilih + Sorotan dari Story, pengguna dapat memilih Sorotan yang sudah ada atau membuat Sorotan baru.
+3. Klik Sorotan di profil membuka pemutar Story layar penuh, bukan modal kecil dengan video controls.
+4. Story dalam Sorotan berjalan berurutan dengan progress bar, video autoplay, tap kiri/kanan, dan swipe.
+5. Data Sorotan lama yang sebelumnya disimpan satu baris per Story tetap dibaca; grouping dibuat saat dibaca.
+6. Menghapus Sorotan menghapus seluruh Story yang ada di dalam koleksi tersebut.
+7. Thumbnail Sorotan memakai lazy loading dan decoding async.
+8. Permintaan Status dan LIVE pendukung profil dijalankan paralel untuk mengurangi waktu tunggu serial.
+9. Android versionName 3.6.12, versionCode 41; asset JS menggunakan cache-busting 3.6.12.
+
+Tidak ada perubahan desain/fitur lain yang ditargetkan.

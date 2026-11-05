@@ -1,0 +1,12 @@
+OHLI SOCIAL v3.6.10 — SOURCE CHECK
+
+147 pemeriksaan statis lulus (tools/source-verify.mjs).
+- JavaScript aplikasi: node --check lulus.
+- Skrip smoke-test: node --check lulus.
+- MainActivity.java: tidak ada diagnostic parser/string seperti unclosed string literal, not a statement, illegal start, atau ; expected pada pemeriksaan javac.
+- javac tetap keluar dengan error karena class Android tidak tersedia pada classpath di lingkungan ini; ini bukan bukti build APK berhasil.
+- Build Gradle/Android penuh belum dijalankan.
+- Smoke test API dua akun belum dijalankan; memerlukan server aktif dan dua sesi uji OTP.
+
+Perbaikan utama: baris instruksi MainActivity yang terbelah kini memakai string Java gabungan dengan newline \n eksplisit.
+Versi Android: 3.6.10 / versionCode 39.

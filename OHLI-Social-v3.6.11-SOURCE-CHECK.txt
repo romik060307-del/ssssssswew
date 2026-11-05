@@ -1,0 +1,11 @@
+OHLI Social v3.6.11 — pemeriksaan source
+
+150 pemeriksaan statis lulus, termasuk:
+- JavaScript frontend dapat diparse.
+- Blok CSS inline dan skrip inline seimbang/valid.
+- Selector mobile menyembunyikan pintasan Story saja dan menampilkan Chat sebagai item keenam.
+- Halaman Video pendek memakai scroll-snap vertikal, video full-bleed, informasi kreator di kiri bawah, dan tombol aksi di sisi kanan.
+- Audio video menunggu interaksi pengguna sebelum mencoba playback bersuara, sesuai kebijakan browser.
+- versionName 3.6.11, versionCode 40, health endpoint dan workflow diperbarui.
+
+Build Gradle penuh dan uji Safari/perangkat nyata belum dijalankan. Pemeriksaan statis bukan bukti bahwa autoplay bersuara dapat dipaksa; browser iOS tetap mensyaratkan interaksi pengguna.

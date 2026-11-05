@@ -1,0 +1,24 @@
+OHLI SOCIAL v3.6.8 — PERUBAHAN
+
+1. LIVE dua arah setelah permintaan bergabung disetujui
+- Penonton yang diangkat menjadi peserta sekarang memakai kembali koneksi WebRTC yang sebelumnya hanya menerima video.
+- Track kamera dan mikrofon lokal dipasang pada transceiver receive-only dan diubah ke sendrecv.
+- Koneksi melakukan renegosiasi SDP offer/answer agar Host menerima video dan audio peserta.
+- Track remote yang dikirim tanpa MediaStream eksplisit digabung ke satu stream per peer agar track video/audio tidak saling mengganti.
+
+2. Navigasi Story dipisahkan dengan benar
+- Tab Status/Story pada OHLI Chat dikembalikan.
+- Hanya pintasan Story pada navigasi bawah OHLI Social yang disembunyikan di mobile.
+- Aturan CSS memakai selector terpisah untuk #app (Chat) dan #ohliSocialShell (Social).
+
+3. Pengurangan request LIVE
+- Interval polling room/signaling/komentar diubah dari 1,8 detik menjadi 2,5 detik.
+- Polling signal dan komentar memiliki guard agar request tidak bertumpuk saat jaringan lambat.
+- Daftar LIVE sekunder diperbarui lebih jarang (12 detik).
+
+4. Build
+- versionName 3.6.8, versionCode 37.
+- Health endpoint menampilkan 3.6.8.
+- GitHub Actions memprioritaskan source archive v3.6.8.
+
+PENTING: Ini perbaikan source dan pemeriksaan statis. Belum ada klaim sukses uji kamera dua perangkat, TURN relay, atau benchmark server produksi. WebRTC tetap membutuhkan HTTPS dan pada sebagian jaringan memerlukan TURN.

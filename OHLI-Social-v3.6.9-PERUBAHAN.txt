@@ -1,0 +1,31 @@
+# OHLI Social v3.6.9 — Perubahan
+
+## Verifikasi nomor melalui WhatsApp manual
+
+- Pendaftaran dan login baru meminta OTP 6 digit dari server.
+- APK yang menjadi host server menerima notifikasi Android privat dengan nomor tujuan, jenis permintaan, dan kode. Admin memeriksa nomor lalu meneruskan kode secara manual melalui WhatsApp.
+- Kode berlaku 5 menit, terikat ke nomor + challenge + tujuan login/daftar, maksimal 5 percobaan, dan hanya bisa digunakan sekali.
+- Server menyimpan HMAC OTP, bukan kode aslinya. Kunci HMAC dibuat acak dan disimpan di direktori privat aplikasi.
+- Pembatasan permintaan: jeda 60 detik per nomor, maksimal 5 permintaan per nomor per 24 jam, dan maksimal 20 permintaan per IP per 10 menit. Tabel limiter RAM dibatasi.
+- Endpoint lama `/api/login` dan `/api/register` mengembalikan HTTP 410 agar klien lama tidak melewati OTP.
+- Token fetch API normal dipindah ke header `X-RKM-Token`; token query media lama dipertahankan untuk kompatibilitas.
+- Respons memakai `nosniff`, `DENY`, dan `no-referrer`; berkas JS/CSS dicache 24 jam.
+- Header IP Cloudflare hanya dipakai jika koneksi TCP berasal dari loopback lokal; jangan menaruh server langsung di internet tanpa reverse proxy HTTPS yang tepercaya.
+
+## Keamanan dan batasan yang perlu diketahui
+
+- OTP manual ini adalah gerbang verifikasi yang dioperasikan admin, bukan OTP resmi yang dikirim otomatis oleh WhatsApp. Admin wajib memastikan penerima WhatsApp benar sebelum meneruskan kode.
+- Notifikasi harus diizinkan pada perangkat APK server. Isi notifikasi disembunyikan pada lock screen, tetapi dapat terlihat setelah perangkat dibuka; kunci perangkat dan jangan gunakan perangkat admin bersama.
+- Login otomatis sesi yang sudah aktif tetap dipertahankan agar pengguna lama tidak dikeluarkan. Login baru atau sesi yang hilang membutuhkan OTP.
+- Rate limit IP berada di RAM sehingga reset saat proses server dimulai ulang; limit per nomor tetap dibantu riwayat challenge yang disimpan.
+- Sistem ini mengurangi bot dan pembuatan akun massal, tetapi bukan jaminan anti-bot mutlak. CAPTCHA, deteksi anomali lintas IP/perangkat, dan sistem admin terpisah dapat ditambahkan jika infrastruktur berkembang.
+- Backend masih menyimpan data JSON dengan satu lock global. Cache aset dan pengurangan data token URL membantu sebagian beban, tetapi belum menyelesaikan bottleneck query dan penulisan JSON. Benchmark nyata belum dilakukan dan migrasi database diperlukan sebelum mengklaim siap untuk banyak pengguna.
+
+## Pengujian
+
+- `node tools/source-verify.mjs`
+- `node --check app/src/main/assets/ohli-social.js`
+- `node --check tools/smoke-test.mjs`
+- Uji dua nomor nyata: permintaan OTP, notifikasi pada APK host, forward manual WhatsApp, kode benar, salah, kedaluwarsa, dan pemakaian ulang.
+- Uji login dan daftar dari dua perangkat, termasuk percobaan melewati endpoint lama.
+- Build APK wajib dilakukan melalui GitHub Actions atau Android SDK lokal; pemeriksaan statis bukan bukti APK berhasil dibuat.
